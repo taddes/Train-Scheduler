@@ -13,7 +13,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$("#submitBtn").on("click", function(event) {
+$("#submitBtn").on("click", function (event) {
   event.preventDefault();
 
   // Grabs user input
@@ -37,7 +37,7 @@ $("#submitBtn").on("click", function(event) {
     firstTrainTime: firstTrainTime,
     frequency: frequency
   };
-  console.log("this is working");
+  // console.log("this is working");
 
   database.ref().push(newTrain);
 
@@ -48,7 +48,7 @@ $("#submitBtn").on("click", function(event) {
   $("#frequency").val("");
 });
 
-database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+database.ref().on("child_added", function (childSnapshot, prevChildKey) {
   var trainName = childSnapshot.val().name;
   var trainDestination = childSnapshot.val().destination;
   var firstTrainTime = childSnapshot.val().firstTrainTime;
@@ -63,36 +63,36 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     1,
     "years"
   );
-  console.log(firstTrainTimeConverted);
+  // console.log(firstTrainTimeConverted);
 
   var currentTime = moment();
-  console.log("Current Time " + moment(currentTime).format("hh:mm"));
+  // console.log("Current Time " + moment(currentTime).format("hh:mm"));
 
   var diffTime = moment().diff(moment(firstTrainTimeConverted), "minutes");
-  console.log("Difference in Time: " + diffTime);
+  // console.log("Difference in Time: " + diffTime);
 
   var remainder = diffTime % frequency;
-  console.log(remainder);
+  // console.log(remainder);
 
   var tMinutesTillTrain = frequency - remainder;
-  console.log("Minutes Until Train " + tMinutesTillTrain);
+  // console.log("Minutes Until Train " + tMinutesTillTrain);
 
   var nextTrain = moment()
     .add(tMinutesTillTrain, "minutes")
     .format("hh:mm");
-  console.log("Next Arrival: " + moment(nextTrain).format("hh:mm"));
+  // console.log("Next Arrival: " + moment(nextTrain).format("hh:mm"));
 
   $("#trainTable > tbody").append(
     "<tr><td>" +
-      trainName +
-      "</td><td>" +
-      trainDestination +
-      "</td><td>" +
-      frequency +
-      "</td><td>" +
-      nextTrain +
-      "</td><td>" +
-      tMinutesTillTrain +
-      "</td><td>"
+    trainName +
+    "</td><td>" +
+    trainDestination +
+    "</td><td>" +
+    frequency +
+    "</td><td>" +
+    nextTrain +
+    "</td><td>" +
+    tMinutesTillTrain +
+    "</td><td>"
   );
 });
