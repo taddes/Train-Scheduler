@@ -9,7 +9,7 @@ var config = {
 };
 
 firebase.initializeApp(config);
-console.log("this is working");
+
 
 var database = firebase.database();
 
@@ -30,7 +30,7 @@ $("#submitBtn").on("click", function(event) {
     .val()
     .trim();
 
-  // Creates local "temporary" object for holding train data
+  // Creates local object for holding train data
   var newTrain = {
     name: trainName,
     destination: trainDestination,
@@ -66,21 +66,21 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   console.log(firstTrainTimeConverted);
 
   var currentTime = moment();
-  console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+  console.log("Current Time " + moment(currentTime).format("hh:mm"));
 
   var diffTime = moment().diff(moment(firstTrainTimeConverted), "minutes");
-  console.log("DIFFERENCE IN TIME: " + diffTime);
+  console.log("Difference in Time: " + diffTime);
 
-  var tRemainder = diffTime % frequency;
-  console.log(tRemainder);
+  var remainder = diffTime % frequency;
+  console.log(remainder);
 
-  var tMinutesTillTrain = frequency - tRemainder;
-  console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+  var tMinutesTillTrain = frequency - remainder;
+  console.log("Minutes Until Train " + tMinutesTillTrain);
 
   var nextTrain = moment()
     .add(tMinutesTillTrain, "minutes")
     .format("hh:mm");
-  console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+  console.log("Next Arrival: " + moment(nextTrain).format("hh:mm"));
 
   $("#trainTable > tbody").append(
     "<tr><td>" +
