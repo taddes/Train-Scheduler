@@ -5,9 +5,11 @@ The program works by using jQuery to grab the inputted train data from a user an
 <br>
 
 <h3>Page format:</h3>
+
 ![Train Scheduler](/assets/images/trainScheduler.png)
 
 
 
 <h3>Firebase database:</h3>
+
 ![Firebase Database](/assets/images/trainFirebase.png)
